@@ -1,0 +1,767 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Fanus Begam H — Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet"/>
+<style>
+:root{
+  --bg-main:#f4f7ff;--bg-alt:#eef2ff;
+  --sky:#56b0e8;--sky-light:#bde3f8;--sky-dark:#2480b8;
+  --lav:#9b8fd4;--lav-light:#dbd5f5;--lav-dark:#6a59b0;
+  --navy:#2c3a6b;--navy-light:#5466a1;--navy-pale:#d6dcf0;
+  --text:#1e2540;--muted:#6c7aaa;--border:#dbe2f5;
+  --white:#ffffff;--gold:#e8c56a;--gold-light:#fdf2cc;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{font-family:'DM Sans',sans-serif;background:var(--bg-main);color:var(--text);overflow-x:hidden;}
+
+/* ═══ PARTICLES ═══ */
+.particle{
+  position:fixed;pointer-events:none;z-index:9996;
+  border-radius:50%;transform:translate(-50%,-50%);
+  animation:particleFly 0.8s ease-out forwards;
+}
+@keyframes particleFly{
+  0%{opacity:1;transform:translate(-50%,-50%) scale(1);}
+  100%{opacity:0;transform:translate(calc(-50% + var(--dx)),calc(-50% + var(--dy))) scale(0);}
+}
+
+/* ═══ MAGNETIC RIPPLE ═══ */
+.ripple{
+  position:absolute;border-radius:50%;pointer-events:none;
+  background:radial-gradient(circle,rgba(155,143,212,0.35) 0%,transparent 70%);
+  transform:translate(-50%,-50%) scale(0);
+  animation:rippleOut 0.6s ease-out forwards;
+}
+@keyframes rippleOut{to{transform:translate(-50%,-50%) scale(4);opacity:0;}}
+
+/* ═══ NAV ═══ */
+nav{
+  position:fixed;top:0;left:0;width:100%;z-index:100;
+  background:rgba(244,247,255,0.92);backdrop-filter:blur(14px);
+  border-bottom:1px solid var(--border);padding:15px 5%;
+  display:flex;align-items:center;justify-content:space-between;
+}
+.nav-logo{font-family:'Cormorant Garamond',serif;font-size:1.5rem;font-weight:600;color:var(--navy);letter-spacing:0.02em;}
+.nav-logo span{color:var(--lav);}
+.nav-links{display:flex;gap:26px;list-style:none;}
+.nav-links a{
+  font-size:0.8rem;letter-spacing:0.1em;text-transform:uppercase;
+  color:var(--navy-light);text-decoration:none;font-weight:500;
+  transition:color 0.25s;position:relative;
+}
+.nav-links a::after{
+  content:'';position:absolute;bottom:-3px;left:0;width:0;height:2px;
+  background:linear-gradient(to right,var(--lav),var(--sky));
+  transition:width 0.3s;border-radius:2px;
+}
+.nav-links a:hover{color:var(--lav-dark);}
+.nav-links a:hover::after{width:100%;}
+.nav-dl-btn{
+  background:linear-gradient(135deg,var(--lav),var(--sky));color:#fff;
+  padding:9px 22px;border-radius:50px;font-size:0.82rem;font-weight:500;
+  letter-spacing:0.06em;text-decoration:none;
+  transition:box-shadow 0.25s,transform 0.2s;
+  display:inline-flex;align-items:center;gap:8px;
+  box-shadow:0 4px 16px rgba(155,143,212,0.35);border:none;
+}
+.nav-dl-btn:hover{box-shadow:0 8px 28px rgba(155,143,212,0.55);transform:translateY(-2px);}
+
+/* ═══ HERO ═══ */
+#hero{
+  min-height:100vh;display:grid;grid-template-columns:1fr 1fr;
+  align-items:center;padding:120px 5% 80px;position:relative;overflow:hidden;
+}
+.hero-bg-circle{position:absolute;border-radius:50%;pointer-events:none;}
+.hero-bg-circle.c1{width:560px;height:560px;background:radial-gradient(circle,var(--lav-light) 0%,transparent 68%);top:-100px;right:-100px;opacity:0.5;animation:floatA 9s ease-in-out infinite;}
+.hero-bg-circle.c2{width:340px;height:340px;background:radial-gradient(circle,var(--sky-light) 0%,transparent 68%);bottom:40px;left:-70px;opacity:0.4;animation:floatB 11s ease-in-out infinite;}
+.hero-bg-circle.c3{width:200px;height:200px;background:radial-gradient(circle,var(--gold-light) 0%,transparent 68%);top:38%;left:43%;opacity:0.3;animation:floatA 13s ease-in-out infinite reverse;}
+@keyframes floatA{0%,100%{transform:translate(0,0)}50%{transform:translate(20px,-25px)}}
+@keyframes floatB{0%,100%{transform:translate(0,0)}50%{transform:translate(-18px,20px)}}
+
+.hero-left{position:relative;z-index:2;}
+.hero-tag{display:inline-block;background:var(--lav-light);color:var(--lav-dark);padding:6px 16px;border-radius:50px;font-size:0.78rem;letter-spacing:0.12em;text-transform:uppercase;font-weight:600;margin-bottom:24px;animation:fadeUp 0.7s 0.1s both;}
+.hero-name{font-family:'Cormorant Garamond',serif;font-size:clamp(3rem,5.5vw,5.2rem);font-weight:300;line-height:1.08;color:var(--navy);margin-bottom:12px;animation:fadeUp 0.7s 0.2s both;}
+.hero-name em{font-style:italic;color:var(--lav);}
+.hero-deg{font-family:'Space Mono',monospace;font-size:0.82rem;color:var(--sky-dark);letter-spacing:0.08em;margin-bottom:28px;animation:fadeUp 0.7s 0.3s both;}
+.hero-bio{font-size:1.05rem;line-height:1.72;color:var(--navy-light);max-width:500px;margin-bottom:36px;animation:fadeUp 0.7s 0.4s both;}
+.hero-actions{display:flex;gap:14px;flex-wrap:wrap;animation:fadeUp 0.7s 0.5s both;}
+.btn-primary{
+  background:linear-gradient(135deg,var(--lav),var(--sky));color:#fff;
+  padding:13px 32px;border-radius:50px;font-size:0.9rem;font-weight:500;
+  text-decoration:none;letter-spacing:0.05em;transition:all 0.25s;
+  display:inline-flex;align-items:center;gap:8px;
+  box-shadow:0 4px 20px rgba(155,143,212,0.35);
+}
+.btn-primary:hover{box-shadow:0 8px 32px rgba(155,143,212,0.55);transform:translateY(-3px);}
+.btn-secondary{
+  background:transparent;color:var(--navy);padding:13px 32px;border-radius:50px;
+  font-size:0.9rem;font-weight:500;text-decoration:none;letter-spacing:0.05em;
+  border:1.5px solid var(--navy-pale);transition:all 0.25s;
+  display:inline-flex;align-items:center;gap:8px;
+}
+.btn-secondary:hover{background:var(--navy);color:#fff;transform:translateY(-3px);}
+
+.hero-right{position:relative;z-index:2;display:flex;justify-content:center;align-items:center;animation:fadeIn 1s 0.4s both;}
+.hero-card{
+  background:var(--white);border-radius:24px;padding:36px;
+  box-shadow:0 20px 60px rgba(44,58,107,0.1);max-width:340px;width:100%;
+  border:1px solid var(--border);
+  transition:transform 0.15s ease,box-shadow 0.15s ease;
+  transform-style:preserve-3d;
+}
+.hero-avatar{width:90px;height:90px;border-radius:50%;background:linear-gradient(135deg,var(--lav-light),var(--sky-light));display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-size:2.4rem;font-weight:600;color:var(--navy);margin:0 auto 20px;}
+.hero-card h3{font-family:'Cormorant Garamond',serif;font-size:1.45rem;text-align:center;color:var(--navy);font-weight:600;margin-bottom:4px;}
+.hero-card>p{text-align:center;font-size:0.82rem;color:var(--muted);margin-bottom:20px;letter-spacing:0.04em;}
+.hero-stat-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:20px;}
+.hero-stat{background:var(--bg-main);border-radius:12px;padding:14px;text-align:center;border:1px solid var(--border);transition:transform 0.2s,box-shadow 0.2s;}
+.hero-stat:hover{transform:scale(1.05);box-shadow:0 4px 16px rgba(155,143,212,0.2);}
+.hero-stat .num{font-family:'Space Mono',monospace;font-size:1.5rem;font-weight:700;color:var(--lav);display:block;}
+.hero-stat .lbl{font-size:0.72rem;color:var(--muted);text-transform:uppercase;letter-spacing:0.1em;}
+.contact-row{display:flex;flex-direction:column;gap:8px;}
+.contact-item{display:flex;align-items:center;gap:10px;font-size:0.82rem;color:var(--navy-light);}
+.contact-icon{width:28px;height:28px;border-radius:8px;background:var(--lav-light);display:flex;align-items:center;justify-content:center;font-size:0.8rem;flex-shrink:0;}
+
+/* ═══ SECTION COMMON ═══ */
+section{padding:100px 5%;}
+.section-label{display:inline-block;font-family:'Space Mono',monospace;font-size:0.72rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--sky-dark);margin-bottom:12px;}
+.section-title{font-family:'Cormorant Garamond',serif;font-size:clamp(2rem,4vw,3.2rem);font-weight:300;color:var(--navy);line-height:1.15;margin-bottom:56px;}
+.section-title strong{font-weight:600;color:var(--lav);}
+.divider{width:60px;height:3px;background:linear-gradient(to right,var(--lav),var(--sky));border-radius:2px;margin:16px 0 56px;}
+
+/* ═══ ABOUT ═══ */
+#about{background:var(--bg-alt);}
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:start;}
+.about-text{font-size:1.02rem;line-height:1.78;color:var(--navy-light);}
+.about-text p{margin-bottom:16px;}
+.skills-block{display:flex;flex-direction:column;gap:20px;}
+.skill-header{display:flex;justify-content:space-between;margin-bottom:6px;}
+.skill-name{font-size:0.88rem;font-weight:500;color:var(--navy);}
+.skill-pct{font-family:'Space Mono',monospace;font-size:0.78rem;color:var(--lav);}
+.skill-bar{height:6px;background:var(--navy-pale);border-radius:4px;overflow:hidden;}
+.skill-fill{height:100%;border-radius:4px;background:linear-gradient(to right,var(--sky),var(--lav));transform:scaleX(0);transform-origin:left;transition:transform 1s cubic-bezier(.4,0,.2,1);}
+.skill-fill.animated{transform:scaleX(1);}
+.badge-cloud{display:flex;flex-wrap:wrap;gap:10px;margin-top:32px;}
+.badge{padding:7px 16px;border-radius:50px;font-size:0.8rem;font-weight:500;letter-spacing:0.04em;border:1px solid;transition:transform 0.2s,box-shadow 0.2s;}
+.badge:hover{transform:translateY(-2px);box-shadow:0 4px 12px rgba(155,143,212,0.3);}
+.badge.lav{background:var(--lav-light);color:var(--lav-dark);border-color:var(--lav);}
+.badge.sky{background:var(--sky-light);color:var(--sky-dark);border-color:var(--sky);}
+.badge.navy{background:var(--navy-pale);color:var(--navy);border-color:#b0bedd;}
+.badge.gold{background:var(--gold-light);color:#7a5f15;border-color:var(--gold);}
+
+/* ═══ TILT CARD (magnetic block) ═══ */
+.tilt-card{
+  transition:transform 0.15s ease,box-shadow 0.15s ease;
+  transform-style:preserve-3d;
+  will-change:transform;
+}
+.tilt-card:hover{box-shadow:0 24px 60px rgba(44,58,107,0.18) !important;}
+
+/* pull-in glow overlay */
+.tilt-card .card-glow{
+  position:absolute;inset:0;border-radius:inherit;pointer-events:none;
+  background:radial-gradient(circle at var(--mx,50%) var(--my,50%),rgba(155,143,212,0.15) 0%,transparent 60%);
+  opacity:0;transition:opacity 0.3s;
+}
+.tilt-card:hover .card-glow{opacity:1;}
+
+/* ═══ EDUCATION ═══ */
+#education{background:var(--bg-main);}
+.edu-card{background:var(--white);border-radius:20px;padding:40px;border:1px solid var(--border);box-shadow:0 8px 32px rgba(44,58,107,0.07);display:grid;grid-template-columns:auto 1fr;gap:28px;align-items:start;max-width:780px;position:relative;overflow:hidden;}
+.edu-icon{width:60px;height:60px;border-radius:16px;background:linear-gradient(135deg,var(--lav-light),var(--sky-light));display:flex;align-items:center;justify-content:center;font-size:1.5rem;flex-shrink:0;}
+.edu-info h3{font-family:'Cormorant Garamond',serif;font-size:1.4rem;font-weight:600;color:var(--navy);margin-bottom:4px;}
+.edu-info .inst{font-size:0.9rem;color:var(--muted);margin-bottom:12px;}
+.cgpa-badge{display:inline-flex;align-items:center;gap:8px;background:linear-gradient(135deg,var(--gold-light),#fceec0);border:1px solid var(--gold);color:#7a5f15;padding:7px 18px;border-radius:50px;font-size:0.88rem;font-weight:600;}
+
+/* ═══ PROJECTS ═══ */
+#projects{background:var(--bg-alt);}
+.projects-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:24px;}
+.project-card{background:var(--white);border-radius:20px;padding:32px;border:1px solid var(--border);position:relative;overflow:hidden;}
+.project-card::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(to right,var(--lav),var(--sky));}
+.project-num{font-family:'Space Mono',monospace;font-size:0.72rem;color:var(--muted);letter-spacing:0.15em;margin-bottom:14px;}
+.project-icon{font-size:2.2rem;margin-bottom:16px;display:inline-block;transition:transform 0.3s;}
+.project-card:hover .project-icon{transform:scale(1.2) rotate(-5deg);}
+.project-card h3{font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-weight:600;color:var(--navy);margin-bottom:10px;}
+.project-card p{font-size:0.88rem;line-height:1.65;color:var(--muted);}
+.project-tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px;}
+.project-tag{background:var(--bg-main);border:1px solid var(--border);padding:4px 12px;border-radius:50px;font-size:0.74rem;color:var(--muted);transition:background 0.2s,color 0.2s;}
+.project-tag:hover{background:var(--lav-light);color:var(--lav-dark);}
+
+/* ═══ PAPERS ═══ */
+#papers{background:var(--bg-main);}
+.papers-list{display:flex;flex-direction:column;gap:20px;max-width:900px;}
+.paper-item{background:var(--white);border-radius:16px;padding:28px 32px;border:1px solid var(--border);display:flex;gap:22px;align-items:flex-start;position:relative;overflow:hidden;}
+.paper-dot{width:44px;height:44px;border-radius:12px;background:linear-gradient(135deg,var(--lav-light),var(--sky-light));display:flex;align-items:center;justify-content:center;font-size:1.1rem;flex-shrink:0;margin-top:2px;transition:transform 0.3s;}
+.paper-item:hover .paper-dot{transform:rotate(15deg) scale(1.1);}
+.paper-info h4{font-size:1rem;font-weight:600;color:var(--navy);margin-bottom:5px;}
+.paper-info p{font-size:0.85rem;color:var(--muted);line-height:1.55;}
+
+/* ═══ ACHIEVEMENTS ═══ */
+#achievements{background:var(--bg-alt);}
+.ach-full{display:flex;flex-direction:column;gap:44px;}
+.ach-block h3{font-family:'Cormorant Garamond',serif;font-size:1.5rem;font-weight:600;color:var(--navy);margin-bottom:20px;padding-bottom:12px;border-bottom:2px solid var(--border);}
+.award-card{background:linear-gradient(135deg,#fffbe8,var(--gold-light));border:1.5px solid var(--gold);border-radius:18px;padding:28px 32px;display:flex;align-items:flex-start;gap:20px;box-shadow:0 4px 20px rgba(232,197,106,0.2);position:relative;overflow:hidden;}
+.award-medal{font-size:2.6rem;flex-shrink:0;animation:medalBob 2s ease-in-out infinite;}
+@keyframes medalBob{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+.award-info h4{font-size:1.05rem;font-weight:600;color:#5a4200;margin-bottom:5px;}
+.award-info p{font-size:0.88rem;color:#8a6800;line-height:1.55;}
+.participate-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:14px;}
+.participate-card{background:var(--white);border:1px solid var(--border);border-radius:14px;padding:18px 20px;display:flex;align-items:flex-start;gap:14px;position:relative;overflow:hidden;}
+.part-icon{width:40px;height:40px;border-radius:10px;background:var(--lav-light);display:flex;align-items:center;justify-content:center;font-size:1.1rem;flex-shrink:0;transition:transform 0.3s;}
+.participate-card:hover .part-icon{transform:scale(1.15) rotate(-8deg);}
+.part-info{font-size:0.85rem;font-weight:500;color:var(--navy);line-height:1.45;}
+.part-info span{display:block;font-size:0.75rem;color:var(--muted);font-weight:400;margin-top:2px;}
+
+/* ═══ CERTIFICATIONS ═══ */
+#certifications{background:var(--bg-main);}
+.certs-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:18px;}
+.cert-card{background:var(--white);border-radius:16px;padding:22px 24px;border:1px solid var(--border);display:flex;gap:16px;align-items:flex-start;position:relative;overflow:hidden;}
+.cert-card::after{content:'';position:absolute;bottom:0;left:0;right:0;height:3px;background:linear-gradient(to right,var(--sky),var(--lav));}
+.cert-icon{width:44px;height:44px;border-radius:12px;background:linear-gradient(135deg,var(--sky-light),var(--lav-light));display:flex;align-items:center;justify-content:center;font-size:1.2rem;flex-shrink:0;transition:transform 0.3s;}
+.cert-card:hover .cert-icon{transform:scale(1.15);}
+.cert-info{font-size:0.88rem;font-weight:500;color:var(--navy);line-height:1.45;}
+.cert-info span{display:block;font-size:0.76rem;color:var(--muted);font-weight:400;margin-top:3px;}
+.cert-mark{display:inline-block;margin-top:7px;background:linear-gradient(135deg,var(--lav-light),var(--sky-light));color:var(--lav-dark);font-weight:700;font-size:0.82rem;padding:4px 14px;border-radius:50px;border:1px solid var(--lav);}
+
+/* ═══ WORKSHOPS ═══ */
+#workshops{background:var(--bg-alt);}
+.wt-grid{display:grid;grid-template-columns:1fr 1fr;gap:40px;}
+.wt-block h3{font-family:'Cormorant Garamond',serif;font-size:1.4rem;font-weight:600;color:var(--navy);margin-bottom:22px;}
+.timeline{list-style:none;position:relative;padding-left:28px;}
+.timeline::before{content:'';position:absolute;left:8px;top:6px;bottom:6px;width:2px;background:linear-gradient(to bottom,var(--sky),var(--lav));border-radius:2px;}
+.timeline li{position:relative;margin-bottom:22px;font-size:0.88rem;color:var(--navy-light);line-height:1.55;transition:transform 0.2s;}
+.timeline li:hover{transform:translateX(6px);}
+.timeline li::before{content:'';position:absolute;left:-24px;top:7px;width:10px;height:10px;border-radius:50%;background:var(--lav);border:2px solid #fff;box-shadow:0 0 0 2px var(--lav);transition:transform 0.2s,background 0.2s;}
+.timeline li:hover::before{transform:scale(1.4);background:var(--sky);}
+.timeline li strong{display:block;color:var(--navy);font-weight:500;margin-bottom:2px;}
+
+/* ═══ DOWNLOAD ═══ */
+#download{background:linear-gradient(135deg,var(--navy) 0%,#1a2448 100%);padding:100px 5%;text-align:center;position:relative;overflow:hidden;}
+#download::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 30% 50%,rgba(155,143,212,0.18) 0%,transparent 60%),radial-gradient(ellipse at 75% 40%,rgba(86,176,232,0.12) 0%,transparent 60%);}
+#download>*{position:relative;z-index:2;}
+#download h2{font-family:'Cormorant Garamond',serif;font-size:clamp(2rem,4vw,3rem);font-weight:300;color:#fff;margin-bottom:14px;}
+#download h2 em{font-style:italic;color:var(--lav-light);}
+#download p{color:rgba(255,255,255,0.55);font-size:1rem;margin-bottom:40px;}
+.dl-btn-large{
+  display:inline-flex;align-items:center;gap:12px;
+  background:linear-gradient(135deg,var(--lav),var(--sky));color:#fff;
+  padding:18px 48px;border-radius:50px;font-size:1rem;font-weight:500;
+  letter-spacing:0.06em;text-decoration:none;
+  box-shadow:0 8px 32px rgba(155,143,212,0.45);
+  transition:all 0.3s;border:none;
+}
+.dl-btn-large:hover{box-shadow:0 16px 50px rgba(155,143,212,0.7);transform:translateY(-4px) scale(1.03);}
+
+/* ═══ FOOTER ═══ */
+footer{background:#101828;padding:40px 5%;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;}
+footer p{color:rgba(255,255,255,0.3);font-size:0.82rem;}
+.footer-name{font-family:'Cormorant Garamond',serif;font-size:1.2rem;color:rgba(255,255,255,0.55);font-weight:300;}
+.footer-links{display:flex;gap:20px;}
+.footer-links a{color:rgba(255,255,255,0.3);font-size:0.8rem;text-decoration:none;transition:color 0.2s;}
+.footer-links a:hover{color:var(--lav-light);}
+
+/* ═══ SCROLL-REVEAL ═══ */
+@keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+.reveal{opacity:0;transform:translateY(30px);transition:opacity 0.7s ease,transform 0.7s ease;}
+.reveal.visible{opacity:1;transform:translateY(0);}
+
+/* ═══ TOOLTIP on hover ═══ */
+[data-tip]{position:relative;}
+[data-tip]::before{
+  content:attr(data-tip);
+  position:absolute;bottom:calc(100% + 8px);left:50%;transform:translateX(-50%) scale(0.85);
+  background:var(--navy);color:#fff;font-size:0.72rem;padding:5px 12px;border-radius:8px;
+  white-space:nowrap;pointer-events:none;opacity:0;transition:opacity 0.2s,transform 0.2s;
+  font-family:'DM Sans',sans-serif;letter-spacing:0.04em;
+}
+[data-tip]:hover::before{opacity:1;transform:translateX(-50%) scale(1);}
+
+/* ═══ RESPONSIVE ═══ */
+@media(max-width:900px){
+  #hero{grid-template-columns:1fr;padding-top:100px;}
+  .hero-right{margin-top:40px;}
+  .about-grid,.wt-grid{grid-template-columns:1fr;}
+  .nav-links{display:none;}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">Fanus<span>.</span></div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#education">Education</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#papers">Papers</a></li>
+    <li><a href="#achievements">Achievements</a></li>
+    <li><a href="#certifications">Certifications</a></li>
+    <li><a href="#workshops">Workshops</a></li>
+  </ul>
+  <button class="nav-dl-btn" onclick="downloadCV()">
+    <svg viewBox="0 0 20 20" fill="currentColor" style="width:14px;height:14px"><path d="M10 3a1 1 0 011 1v8.586l2.293-2.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 111.414-1.414L9 12.586V4a1 1 0 011-1z"/><path d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"/></svg>
+    Resume
+  </button>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-bg-circle c1"></div>
+  <div class="hero-bg-circle c2"></div>
+  <div class="hero-bg-circle c3"></div>
+  <div class="hero-left">
+    <div class="hero-tag">👩‍💻 ECE Engineer &amp; Tech Enthusiast</div>
+    <h1 class="hero-name">Hi I am<br><em>Fanus Begam </em></h1>
+    <p class="hero-deg">B.E. Electronics &amp; Communication Engineering · CGPA 8.5</p>
+    <p class="hero-bio">A passionate engineer who loves building with sensors, microcontrollers, embedded systems and VLSI chip design to solve real-world problems. Proficient in Python &amp; C, currently exploring Java.</p>
+    <div class="hero-actions">
+      <a class="btn-primary" href="#projects">
+        View Projects
+        <svg viewBox="0 0 20 20" fill="currentColor" style="width:16px;height:16px"><path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"/></svg>
+      </a>
+      <a class="btn-secondary" href="#about">About Me</a>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="hero-card tilt-card" id="heroCard">
+      <div class="card-glow"></div>
+      <div class="hero-avatar">FB</div>
+      <h3>Fanus Begam H</h3>
+      <p>ECE Student · Kurinjipadi, TN</p>
+      <div class="hero-stat-row">
+        <div class="hero-stat" data-tip="Academic Score"><span class="num">8.5</span><span class="lbl">CGPA</span></div>
+        <div class="hero-stat" data-tip="Completed Projects"><span class="num">2</span><span class="lbl">Projects</span></div>
+        <div class="hero-stat" data-tip="Papers Presented"><span class="num">3</span><span class="lbl">Papers</span></div>
+        <div class="hero-stat" data-tip="Certifications"><span class="num">6+</span><span class="lbl">Certs</span></div>
+      </div>
+      <div class="contact-row">
+        <div class="contact-item"><div class="contact-icon">📱</div>+91 9092999096</div>
+        <div class="contact-item"><div class="contact-icon">✉️</div>fanusbegam.h@ckcet.ac.in</div>
+        <div class="contact-item"><div class="contact-icon">📍</div>Velavinayagarkuppam, Kurinjipadi</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="reveal">
+    <span class="section-label">01 — About Me</span>
+    <h2 class="section-title">Driven by <strong>curiosity</strong>,<br>powered by technology</h2>
+    <div class="divider"></div>
+  </div>
+  <div class="about-grid">
+    <div class="about-text reveal">
+      <p>I am a dedicated Electronics &amp; Communication Engineering student with a strong interest in building practical, technology-driven solutions. I enjoy exploring the intersection of hardware and software to create impactful projects.</p>
+      <p>My expertise spans embedded systems, microcontrollers, VLSI design, and IoT systems. I am proficient in C and Python, and expanding my skills in Java and advanced embedded platforms like STM32 and Raspberry Pi Pico.</p>
+      <p>Beyond the technical side, I am a natural communicator, team player, and quick learner — qualities that I bring to every project and collaboration.</p>
+      <div class="badge-cloud">
+        <span class="badge lav">Embedded Systems</span>
+        <span class="badge sky">VLSI Design</span>
+        <span class="badge navy">IoT Systems</span>
+        <span class="badge gold">Python</span>
+        <span class="badge lav">C Programming</span>
+        <span class="badge sky">Microcontrollers</span>
+        <span class="badge navy">Java (Learning)</span>
+        <span class="badge gold">Sensors</span>
+      </div>
+    </div>
+    <div class="skills-block reveal">
+      <div class="skill-item">
+        <div class="skill-header"><span class="skill-name">C Programming</span><span class="skill-pct">85%</span></div>
+        <div class="skill-bar"><div class="skill-fill" style="width:85%"></div></div>
+      </div>
+      <div class="skill-item">
+        <div class="skill-header"><span class="skill-name">Python</span><span class="skill-pct">80%</span></div>
+        <div class="skill-bar"><div class="skill-fill" style="width:80%"></div></div>
+      </div>
+      <div class="skill-item">
+        <div class="skill-header"><span class="skill-name">VLSI Design</span><span class="skill-pct">75%</span></div>
+        <div class="skill-bar"><div class="skill-fill" style="width:75%"></div></div>
+      </div>
+      <div class="skill-item">
+        <div class="skill-header"><span class="skill-name">Embedded Systems</span><span class="skill-pct">70%</span></div>
+        <div class="skill-bar"><div class="skill-fill" style="width:70%"></div></div>
+      </div>
+      <div class="skill-item">
+        <div class="skill-header"><span class="skill-name">IoT Systems</span><span class="skill-pct">68%</span></div>
+        <div class="skill-bar"><div class="skill-fill" style="width:68%"></div></div>
+      </div>
+      <div class="skill-item">
+        <div class="skill-header"><span class="skill-name">Java</span><span class="skill-pct">40%</span></div>
+        <div class="skill-bar"><div class="skill-fill" style="width:40%"></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EDUCATION -->
+<section id="education">
+  <div class="reveal">
+    <span class="section-label">02 — Education</span>
+    <h2 class="section-title">Academic <strong>Foundation</strong></h2>
+    <div class="divider"></div>
+  </div>
+  <div class="edu-card tilt-card reveal">
+    <div class="card-glow"></div>
+    <div class="edu-icon">🎓</div>
+    <div class="edu-info">
+      <h3>Bachelor of Engineering</h3>
+      <p class="inst">Electronics &amp; Communication Engineering · C.K. College of Engineering and Technology</p>
+      <div class="cgpa-badge">⭐ CGPA: 8.5 / 10</div>
+      <div class="badge-cloud" style="margin-top:18px">
+        <span class="badge sky">Signal Processing</span>
+        <span class="badge lav">VLSI Design</span>
+        <span class="badge navy">Embedded Systems</span>
+        <span class="badge gold">Communication Theory</span>
+        <span class="badge sky">Microprocessors</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="reveal">
+    <span class="section-label">03 — Projects</span>
+    <h2 class="section-title">Engineering <strong>Solutions</strong></h2>
+    <div class="divider"></div>
+  </div>
+  <div class="projects-grid">
+    <div class="project-card tilt-card reveal">
+      <div class="card-glow"></div>
+      <p class="project-num">01 / Project</p>
+      <div class="project-icon">☀️</div>
+      <h3>Solar-Powered Portable Charger</h3>
+      <p>A sustainable, portable energy solution that harnesses solar power to charge electronic devices on the go. Incorporates efficient power regulation circuits and battery management for optimum performance in off-grid environments.</p>
+      <div class="project-tags">
+        <span class="project-tag">Solar Energy</span>
+        <span class="project-tag">Power Electronics</span>
+        <span class="project-tag">Battery Management</span>
+        <span class="project-tag">Hardware Design</span>
+      </div>
+    </div>
+    <div class="project-card tilt-card reveal">
+      <div class="card-glow"></div>
+      <p class="project-num">02 / Project</p>
+      <div class="project-icon">🤖</div>
+      <h3>Autonomous Smart Pest Controller</h3>
+      <p>A fully autonomous AI-powered pest control system integrating computer vision, real-time object detection, and microcontroller-based navigation to identify and neutralize pest threats without human intervention. Equipped with IR sensors, motor-driven chassis, and intelligent decision-making algorithms for residential and agricultural environments.</p>
+      <div class="project-tags">
+        <span class="project-tag">AI / Computer Vision</span>
+        <span class="project-tag">Microcontroller</span>
+        <span class="project-tag">IR Sensors</span>
+        <span class="project-tag">Autonomous Navigation</span>
+        <span class="project-tag">IoT</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PAPERS -->
+<section id="papers">
+  <div class="reveal">
+    <span class="section-label">04 — Research &amp; Papers</span>
+    <h2 class="section-title">Paper <strong>Presentations</strong></h2>
+    <div class="divider"></div>
+  </div>
+  <div class="papers-list">
+    <div class="paper-item tilt-card reveal">
+      <div class="card-glow"></div>
+      <div class="paper-dot">🏥</div>
+      <div class="paper-info">
+        <h4>IoT-Based Health Monitoring Dashboard for Hospital</h4>
+        <p>Presented at DR. MGR Education and Research Institute, Chennai — Real-time patient health monitoring using IoT sensors and a live dashboard to assist medical staff efficiently.</p>
+      </div>
+    </div>
+    <div class="paper-item tilt-card reveal">
+      <div class="card-glow"></div>
+      <div class="paper-dot">🛸</div>
+      <div class="paper-info">
+        <h4>Machine Learning Based System Evaluation for UAV and SAR System</h4>
+        <p>Presented at St. Anne's College of Engineering and Technology, Panruti — ML algorithms for performance evaluation of UAVs in Search and Rescue operations.</p>
+      </div>
+    </div>
+    <div class="paper-item tilt-card reveal">
+      <div class="card-glow"></div>
+      <div class="paper-dot">🤖</div>
+      <div class="paper-info">
+        <h4>AI-Powered Smart Pest Control Rover for Home</h4>
+        <p>Autonomous AI-driven rover for intelligent pest detection and control using computer vision, IR sensors, and real-time decision-making in domestic environments.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ACHIEVEMENTS -->
+<section id="achievements">
+  <div class="reveal">
+    <span class="section-label">05 — Recognition</span>
+    <h2 class="section-title">Achievements &amp; <strong>Participation</strong></h2>
+    <div class="divider"></div>
+  </div>
+  <div class="ach-full">
+    <div class="ach-block reveal">
+      <h3>🏆 Award</h3>
+      <div class="award-card tilt-card">
+        <div class="card-glow"></div>
+        <div class="award-medal">🥇</div>
+        <div class="award-info">
+          <h4>First Prize — Paper Presentation</h4>
+          <p>AI-Powered Crop Health Monitoring System using Multispectral and Hyperspectral Imaging at M.R.K College of Engineering and Technology</p>
+        </div>
+      </div>
+    </div>
+    <div class="ach-block reveal">
+      <h3>🎖️ Participation Certificates</h3>
+      <div class="participate-grid">
+        <div class="participate-card tilt-card">
+          <div class="card-glow"></div>
+          <div class="part-icon">🤖</div>
+          <div class="part-info">Robo Miracle IV<span>Robotics Competition — Participation Certificate</span></div>
+        </div>
+        <div class="participate-card tilt-card">
+          <div class="card-glow"></div>
+          <div class="part-icon">🔬</div>
+          <div class="part-info">Project Expo<span>St. Anne's College of Engineering and Technology</span></div>
+        </div>
+        <div class="participate-card tilt-card">
+          <div class="card-glow"></div>
+          <div class="part-icon">✈️</div>
+          <div class="part-info">Industrial Visit<span>Aero Knotz Drones India Pvt. Ltd.</span></div>
+        </div>
+        <div class="participate-card tilt-card">
+          <div class="card-glow"></div>
+          <div class="part-icon">💼</div>
+          <div class="part-info">Industrial Internship<span>Lenovo Manufacturing Company, Pondicherry — 5 Days</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CERTIFICATIONS -->
+<section id="certifications">
+  <div class="reveal">
+    <span class="section-label">06 — Certifications</span>
+    <h2 class="section-title">Certified <strong>Skills</strong></h2>
+    <div class="divider"></div>
+  </div>
+  <div class="certs-grid">
+    <div class="cert-card tilt-card reveal">
+      <div class="card-glow"></div>
+      <div class="cert-icon">🐍</div>
+      <div class="cert-info">Introduction to Python (IIY) Course<span>SWAYAM Platform</span><span class="cert-mark">📊 Score: 72 / 100</span></div>
+    </div>
+    <div class="cert-card tilt-card reveal">
+      <div class="card-glow"></div>
+      <div class="cert-icon">⚡</div>
+      <div class="cert-info">Two-Day Hands-on: Altair PSIM &amp; Flux Motor<span>Power Simulation — Technical Workshop</span></div>
+    </div>
+    <div class="cert-card tilt-card reveal">
+      <div class="card-glow"></div>
+      <div class="cert-icon">🤖</div>
+      <div class="cert-info">Robo Miracle IV<span>Robotics Event — Participation Certificate</span></div>
+    </div>
+    <div class="cert-card tilt-card reveal">
+      <div class="card-glow"></div>
+      <div class="cert-icon">✈️</div>
+      <div class="cert-info">Industrial Visit — Aero Knotz Drones India Pvt. Ltd.<span>Drone Technology Industrial Exposure</span></div>
+    </div>
+    <div class="cert-card tilt-card reveal">
+      <div class="card-glow"></div>
+      <div class="cert-icon">🔬</div>
+      <div class="cert-info">Project Expo Participant<span>St. Anne's College of Engineering and Technology</span></div>
+    </div>
+    <div class="cert-card tilt-card reveal">
+      <div class="card-glow"></div>
+      <div class="cert-icon">💼</div>
+      <div class="cert-info">Five-Day Internship — Lenovo Company<span>Industrial Training Certificate</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- WORKSHOPS -->
+<section id="workshops">
+  <div class="reveal">
+    <span class="section-label">07 — Learning</span>
+    <h2 class="section-title">Workshops &amp; <strong>Training</strong></h2>
+    <div class="divider"></div>
+  </div>
+  <div class="wt-grid">
+    <div class="wt-block reveal">
+      <h3>🔬 Workshops Attended</h3>
+      <ul class="timeline">
+        <li><strong>Simulation of Embedded System using STM32 Processor</strong>C.K. College of Engineering and Technology, Cuddalore — Hands-on embedded simulation and real-time STM32 programming.</li>
+        <li><strong>Simulation of PSIM Software and Flux Motor</strong>C.K. College of Engineering and Technology, Cuddalore — Power simulation and motor control using industry-standard PSIM.</li>
+        <li><strong>Simulation of Raspberry Pi Pico using MicroPython</strong>C.K. College of Engineering and Technology, Cuddalore — MicroPython programming for the RP2040 microcontroller.</li>
+      </ul>
+    </div>
+    <div class="wt-block reveal">
+      <h3>🏭 Industrial Training</h3>
+      <ul class="timeline">
+        <li><strong>Lenovo Manufacturing Company, Pondicherry</strong>Five-Day Industrial Internship — Hands-on exposure to large-scale electronics manufacturing, quality control, and global production workflows.</li>
+      </ul>
+      <div style="margin-top:36px;">
+        <h3>🎯 Career Goals</h3>
+        <p style="font-size:0.9rem;color:var(--navy-light);line-height:1.72;margin-top:14px">Seeking opportunities in embedded systems, VLSI design, or IoT development to apply academic knowledge and grow through practical experience.</p>
+        <div class="badge-cloud" style="margin-top:16px">
+          <span class="badge lav">Embedded Engineer</span>
+          <span class="badge sky">VLSI Developer</span>
+          <span class="badge navy">IoT Specialist</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DOWNLOAD -->
+<section id="download">
+  <h2>Ready to work<br><em>together?</em></h2>
+  <p>Download the full resume or reach out directly to connect.</p>
+  <button class="dl-btn-large" onclick="downloadCV()">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="width:20px;height:20px">
+      <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/>
+    </svg>
+    Download Resume (CV)
+  </button>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-name">Fanus Begam H</div>
+  <p>© 2025 · B.E. Electronics &amp; Communication Engineering</p>
+  <div class="footer-links">
+    <a href="mailto:fanusbegam.h@ckcet.ac.in">Email</a>
+    <a href="tel:+919092999096">Phone</a>
+    <a href="#hero">Top ↑</a>
+  </div>
+</footer>
+
+<script>
+/* ═══════════════════════════════════════
+   DOWNLOAD REAL RESUME FILE
+═══════════════════════════════════════ */
+function downloadCV(){
+  const a = document.createElement('a');
+  a.href = 'Fanus_Resume.docx';
+  a.download = 'Fanus_Begam_Resume.docx';
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  // burst particles on download
+  spawnBurst(window.innerWidth/2, window.innerHeight/2, 20);
+}
+
+/* ═══════════════════════════════════════
+   PARTICLE BURST on CLICK
+═══════════════════════════════════════ */
+function spawnBurst(x,y,count=12){
+  const colors=['#9b8fd4','#56b0e8','#dbd5f5','#bde3f8','#e8c56a','#c4b5f8'];
+  for(let i=0;i<count;i++){
+    const p=document.createElement('div');
+    p.className='particle';
+    const size=4+Math.random()*8;
+    const angle=Math.random()*Math.PI*2;
+    const dist=40+Math.random()*80;
+    p.style.cssText=`
+      width:${size}px;height:${size}px;
+      left:${x}px;top:${y}px;
+      background:${colors[Math.floor(Math.random()*colors.length)]};
+      --dx:${Math.cos(angle)*dist}px;
+      --dy:${Math.sin(angle)*dist}px;
+      animation-duration:${0.5+Math.random()*0.5}s;
+    `;
+    document.body.appendChild(p);
+    setTimeout(()=>p.remove(),1000);
+  }
+}
+document.addEventListener('click',e=>spawnBurst(e.clientX,e.clientY));
+
+/* ═══════════════════════════════════════
+   TILT / PULL-IN PULL-OUT CARDS
+═══════════════════════════════════════ */
+document.querySelectorAll('.tilt-card').forEach(card=>{
+  const glow=card.querySelector('.card-glow');
+
+  card.addEventListener('mouseenter',()=>{
+    card.style.boxShadow='0 28px 70px rgba(44,58,107,0.2)';
+    card.style.transform='scale(1.025) translateY(-6px)';
+    // ripple
+    const r=document.createElement('div');
+    r.className='ripple';
+    r.style.cssText='left:50%;top:50%;width:100px;height:100px;';
+    card.appendChild(r);
+    setTimeout(()=>r.remove(),700);
+  });
+
+  card.addEventListener('mouseleave',()=>{
+    card.style.transform='scale(1) translateY(0) rotateX(0deg) rotateY(0deg)';
+    card.style.boxShadow='';
+    if(glow) glow.style.opacity='0';
+  });
+
+  card.addEventListener('mousemove',e=>{
+    const rect=card.getBoundingClientRect();
+    const cx=rect.left+rect.width/2;
+    const cy=rect.top+rect.height/2;
+    const dx=(e.clientX-cx)/(rect.width/2);
+    const dy=(e.clientY-cy)/(rect.height/2);
+    const tiltX=dy*10;   // pull-in tilt
+    const tiltY=-dx*10;
+    card.style.transform=`scale(1.025) translateY(-6px) rotateX(${tiltX}deg) rotateY(${tiltY}deg)`;
+    // glow follows mouse
+    if(glow){
+      const mx=((e.clientX-rect.left)/rect.width*100).toFixed(1)+'%';
+      const my=((e.clientY-rect.top)/rect.height*100).toFixed(1)+'%';
+      glow.style.setProperty('--mx',mx);
+      glow.style.setProperty('--my',my);
+      glow.style.opacity='1';
+    }
+  });
+});
+
+/* ═══════════════════════════════════════
+   SCROLL REVEAL + SKILL BARS
+═══════════════════════════════════════ */
+const revealObserver=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      e.target.classList.add('visible');
+      e.target.querySelectorAll('.skill-fill').forEach(b=>b.classList.add('animated'));
+    }
+  });
+},{threshold:0.12});
+document.querySelectorAll('.reveal').forEach(el=>revealObserver.observe(el));
+
+window.addEventListener('load',()=>{
+  document.querySelectorAll('.reveal').forEach(el=>{
+    if(el.getBoundingClientRect().top<window.innerHeight){
+      el.classList.add('visible');
+      el.querySelectorAll('.skill-fill').forEach(b=>b.classList.add('animated'));
+    }
+  });
+  // welcome burst
+  setTimeout(()=>spawnBurst(window.innerWidth*0.75,window.innerHeight*0.4,16),800);
+});
+
+/* ═══════════════════════════════════════
+   MAGNETIC NAV LINKS
+═══════════════════════════════════════ */
+document.querySelectorAll('.nav-links a').forEach(link=>{
+  link.addEventListener('mousemove',e=>{
+    const rect=link.getBoundingClientRect();
+    const dx=(e.clientX-(rect.left+rect.width/2))*0.35;
+    const dy=(e.clientY-(rect.top+rect.height/2))*0.35;
+    link.style.transform=`translate(${dx}px,${dy}px)`;
+  });
+  link.addEventListener('mouseleave',()=>link.style.transform='');
+});
+</script>
+</body>
+</html>
